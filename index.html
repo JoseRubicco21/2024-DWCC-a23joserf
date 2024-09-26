@@ -4,6 +4,10 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Document</title>
+		<script defer src="./index.js"></script>
+		<script>
+			console.log('Hola');
+		</script>
 	</head>
 	<body>
 		<h1>Some Content</h1>
@@ -13,16 +17,26 @@
 			<li>123</li>
 		</ul>
 
+		<button class="ls">Log to console</button>
+		<button class="lss">Log to console generalized</button>
 		<script>
 			let user = 'jose';
 			let a1,
 				b2,
 				b3 = 0;
+
 			const exampleArrowFunction = () => {
 				console.log('Some text');
 			};
 
 			exampleArrowFunction();
+
+			() => {
+				console.log(
+					"this is anonymous, why don't we have clousres explained :("
+				);
+				console.warn('please explain closures');
+			};
 		</script>
 
 		<ul>
