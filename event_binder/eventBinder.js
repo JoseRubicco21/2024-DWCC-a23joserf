@@ -25,4 +25,8 @@ function bind(element, event, funct) {
 	element.addEventListener(`${event}`, funct);
 }
 
+// How do I define direction of Many to One or One to Many?
 function bindManyToOne(element, event, funct) {}
+
+// Not super sure on how to implement this one
+function bindManyToMany(element, event, funct) {}
