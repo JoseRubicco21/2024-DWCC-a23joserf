@@ -3,6 +3,15 @@
 // EventBinder a simple js lib to bind eventListeners faster, easier and using first-class functions.
 // or anonymous ones. This is just an abstraction to code faster in case there's a lot of event binding going.
 
+// Probably is best to define an enum of possible strategies for binding? something like
+// bindStrategy : oneToOneToOne - bind
+// bindStrategy : manyToOneToOne - bindToAllElements
+// bindStrategy : oneToManyToOne - bindToAllEvents
+// bindStrategy : oneToManyToMany
+// bindStrategy : manyToManyToMany
+
+// Still need to think trugh this as one binding can only have a funct.
+// bind serves as bindOneToOne.
 function bind(element, event, funct) {
 	if (element === null || element === undefined || element.length === 0)
 		throw new ReferenceError('The element passed in is not defined. Aborting.');
@@ -25,8 +34,19 @@ function bind(element, event, funct) {
 	element.addEventListener(`${event}`, funct);
 }
 
+// It would be better to rethink this since it's actually a N:M:P relationship rather than what it seemed as N:M.
+
 // How do I define direction of Many to One or One to Many?
-function bindManyToOne(element, event, funct) {}
+// Binds many element to the same event with the same function.
+function bindManyToOne(elements, event, funct) {
+	elements.forEach((element) => {
+		bind(element, event, funct);
+	});
+}
 
 // Not super sure on how to implement this one
-function bindManyToMany(element, event, funct) {}
+// Bind every event passed to every element. All-to-All
+function bindManyToMany(elements, event, funct) {}
+
+// binds a lot of events listeners to one element.
+function bindOneToMany(element, event, funct) {}

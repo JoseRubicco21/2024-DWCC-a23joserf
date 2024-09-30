@@ -54,7 +54,16 @@ let funcs = [
 	},
 ];
 
+console.log(NaN == undefined);
+console.log(NaN === undefined);
+
 eventListenerBinder('.lss', events, funcs);
+
+const functest = () => {
+	console.log(2);
+};
+
+console.log(typeof functest);
 
 const t = {};
 console.dir(t);
