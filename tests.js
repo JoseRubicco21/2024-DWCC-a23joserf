@@ -55,3 +55,11 @@ switch (fruit) {
 		console.log(':(');
 		break;
 }
+
+let searchStr = 'test';
+
+// Optional value defaults to str.length
+console.log(`abc1234test`.endsWith(searchStr)); // string ends with test --> true
+console.log(`Lorem ipsum test`.endsWith(searchStr)); // String ends with test --> true
+console.log(`abcd1234test another one`.endsWith(searchStr, 12)); // String ends with test starting  to search from position 12 backwards. --> true
+console.log(`Lorem ipsum test`.endsWith(searchStr, 12)); // String ends with test starting to search from position 12 backwards.  --> fasle
