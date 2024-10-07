@@ -70,4 +70,84 @@ console.dir(t);
 t.p = 111;
 console.dir(t);
 
+console.log(+'0'); // False. PLEASE HELP.
+
+console.log(undefined == null); // non-strict
+console.log(undefined === null); // strict
+
+console.log('false' == +false); // false
+console.log(+'false' == +true); // false -- Converts "+true" --> "1" and compares to "false" == "1" wich is false. Please help.
+console.log(Boolean('False') == +true); // true;  strs are truthy
+console.log(+'false'); // NaN
+
+console.log('For: 0 vs any other number');
+console.log('0' < '1'); // alphabeticall order is more or less this one : A-Za-z0-9
+console.log('For a < A');
+console.log('a' < 'A');
+
 const n = new CustomEvent('eventTest');
+
+/**
+ *
+setTimeout(() => {
+	// doSomething :tm:
+}, 3000); // 3000ms
+*/
+
+/*
+setInterval(() => {
+	c++;
+	console.log(c);
+}, 1000);
+*/
+/*
+function count(count) {
+	count++;
+	console.log(count);
+} */
+
+//setInterval(() => count(c), 1000);
+
+console.log('2' == 2); // true
+let a = 4,
+	b = 5,
+	c = '5';
+
+console.log('a = ' + a + ', b = ' + b + ', c = ' + c); // " a str with all the stuff?" - yep
+console.log("'b == c' -> " + (b == c)); // "b == c -> true" - yep
+console.log("'b === c' -> " + (b === c)); // false - yep
+console.log("'b != c' -> " + (b != c)); // false ? - yep
+console.log("'b !== c' -> " + (b !== c)); //true - yep
+console.log("'a == b' -> " + (a == b)); // false - yep
+console.log("'a != b' -> " + (a != b)); // true - yep
+
+let m;
+m ??= 3;
+console.log(m);
+
+let z;
+
+z = null ?? console.log("please don't work");
+
+/**
+ * So I, is defined in global and lexical scope
+ * in cursed k = null ?? or the console log of i.
+ * So in order to make k = i then one needs to do ??= No lol
+ *
+ */
+// let i = 33;
+// function cursed() {
+// 	let k;
+// 	k ??= cursed2(); // function calls fall to undefined
+// 	console.log(i);
+// 	console.log(typeof k);
+// 	//console.log(typeof console.log);
+// }
+// cursed();
+
+// void return types are undefined ????
+
+// function definition
+function cursed2() {
+	return 2;
+}
