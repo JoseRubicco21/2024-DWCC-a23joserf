@@ -13,5 +13,13 @@ console.log(
 
 // Integer with sign
 function calculateLengthOfNumberWithSign(number) {
-	return `${number.abs()}`.length;
+	return `${number.abs().floor()}`.length;
 }
+
+// A bit better
+
+function calculateLengthOfNumberWithSignVerbose() {
+	return number.floor().abs().toString().length;
+}
+
+console.log(calculateLengthOfNumberWithSignVerbose(332244));
