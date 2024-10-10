@@ -18,7 +18,7 @@ function calculateLengthOfNumberWithSign(number) {
 
 // A bit better
 
-function calculateLengthOfNumberWithSignVerbose() {
+function calculateLengthOfNumberWithSignVerbose(number) {
 	return number.floor().abs().toString().length;
 }
 
