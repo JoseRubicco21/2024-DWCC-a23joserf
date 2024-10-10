@@ -7,6 +7,11 @@ novaCadea = cadea.charAt(0).toUpperCase().concat(cadea.slice(1, cadea.length));
 
 console.log(novaCadea); // 'Desenvolvemento web'
 
+/**
+ *  A lot more simple lol.
+ * 	cadea.replace("d", "D");
+ */
+
 // 2. Crea unha función á que se lle pase unha cadea e devolva a cadea en sentido
 // inverso.
 
@@ -25,4 +30,12 @@ function enmascarar(string) {
 	const result = slicedString.padStart(string.length, '*');
 	return result;
 }
+
+/* Simpler */
+
+function enmascarar2(str) {
+	return str.slice(-4).padStart(str.length, '*');
+}
+
 console.log(enmascarar('1234123412347777')); // ************7777
+console.log(`Enmascarar 2 : ${enmascarar2('1234123412347777')}`);
