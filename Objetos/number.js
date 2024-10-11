@@ -19,7 +19,7 @@ function calculateLengthOfNumberWithSign(number) {
 // A bit better
 
 function calculateLengthOfNumberWithSignVerbose(number) {
-	return number.floor().abs().toString().length;
+	return Math.abs(Math.floor(number)).toString().length;
 }
 
 console.log(calculateLengthOfNumberWithSignVerbose(332244));
