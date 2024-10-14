@@ -78,3 +78,99 @@ en formato camelCase. Por exemplo, se o array de entrada é [“first_name”, �
 last_NAME”], deberase mostrar por consola “firtsName” e “lastName”.
 14
 */
+
+function toCamelCaseDestruct(string, separator) {
+	[part1, part2] = string.split(separator);
+	return part1.toLowerCase() + part2.charAt(0).toUpperCase() + part2.slice(1);
+}
+
+function ArrayToCamelCaseDestruct(array, separator) {
+	let result = [];
+	for (item of array) {
+		result.push(toCamelCaseDestruct(item, separator));
+	}
+	return result;
+}
+
+function toCamelCase(string, separator) {
+	let newStrArray = string.split(separator);
+	newStrArray[1] =
+		newStrArray[1].charAt(0).toUpperCase() +
+		newStrArray[1].substring(1, newStrArray[1].length);
+	return newStrArray.join('');
+}
+
+function ArrayToCamelCase(array, separator) {
+	let newArray = [];
+	for (let item of array) {
+		newArray.push(toCamelCase(item, separator));
+	}
+	return newArray;
+}
+
+let testArray = ['first_name', 'last_NAME'];
+
+let newTestArray = ArrayToCamelCase(testArray, '_');
+let newTestArrayDestruct = ArrayToCamelCaseDestruct(testArray, '_');
+console.log(newTestArray);
+console.log(newTestArrayDestruct);
+
+/**
+ * Generalized way for n number of separators
+ *
+ */
+// makes n number of separators to camel case,
+function nToCamelCase(string, separator) {
+	let splittedString = string.split(separator);
+	let transformedString = [];
+	for (word of splittedString) {
+		transformedString.push(capitalizeFirstLetter(word));
+	}
+	// Quick dirty fix. It's more simple than adding complexity to the loop. Not sure if it is best like this or the other way around.
+	transformedString[0] = transformedString[0].toLowerCase();
+	return transformedString.join('');
+}
+
+function capitalizeFirstLetter(string) {
+	return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function ArrayToNCamelCase(array, separator) {
+	let result = [];
+	for (item of array) {
+		result.push(nToCamelCase(item, separator));
+	}
+	return result;
+}
+
+let testArrayGeneralized = [
+	'first_name_and_some_more',
+	'last_NAME',
+	'Other_things_are_very_important_too',
+];
+
+let resultArray = ArrayToNCamelCase(testArrayGeneralized, '_');
+console.log(resultArray);
+
+const flightsInfo =
+	'_Delayed_Departure;scq93766109;bio2133758440;11:25+_Arrival;bio0943384722;scq93766109;11:45+_Delayed_Arrival;svq7439299980;scq93766109;12:05+_Departure;scq93766109;svq2323639855;12:30';
+
+function getFlightInfo(string) {
+	[departure, city, city2, time] = string.split(';');
+	let result = `${departure
+		.replaceAll('_', ' ')
+		.slice(0, departure.length)} ${city.slice(0, 3).toUpperCase()} ${city2
+		.slice(0, 3)
+		.toUpperCase()} (${time})`;
+	return result;
+}
+
+function getFlightsInfo(string) {
+	let flights = string.split('+');
+	let max = Math.max(...flights.map((map) => map.length));
+	for (flight of flights) {
+		console.log(getFlightInfo(flight).padStart(max, ' '));
+	}
+}
+
+getFlightsInfo(flightsInfo);
