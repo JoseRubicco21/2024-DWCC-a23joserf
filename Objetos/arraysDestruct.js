@@ -37,9 +37,7 @@ de cada equipo. Así, players1 terá os xogadores do primeiro equipo e
 players2 os do segundo equipo.
 
 */
-let players1, players2;
-[players1, players2] = [...players];
-
+const [players1, players2] = [...players];
 console.log(players1, players2);
 
 /*
@@ -49,16 +47,15 @@ Crea unha variable chamada gk que conteña o porteiro do primeiro equipo e
 unha variable de tipo array chamada fieldPlayers que conteña o resto de
 xogadores do equipo.
 */
-let gk, fieldPlayers;
-[gk, ...fieldPlayers] = players1;
+
+const [gk, ...fieldPlayers] = players1;
 console.log(gk, fieldPlayers);
 
 /*
 c. Crea un array allPlayers que conteña os xogadores dos dous equipos.
 */
 
-let allPlayers;
-[...allPlayers] = [...players1, ...players2];
+const allPlayers = [...players1, ...players2];
 console.log(allPlayers);
 
 /*
@@ -67,8 +64,7 @@ d. O primeiro equipo substituíu os xogadores iniciais por 'Thiago', 'Coutinho',
 conteña todos os xogadores: os iniciais e tamén os 3 novos.
 */
 
-let players1Final;
-[...players1Final] = [...players1, 'Thiago', 'Coutinho', 'Periscic'];
+const players1Final = [...players1, 'Thiago', 'Coutinho', 'Periscic'];
 console.log(players1Final);
 
 /*
@@ -80,8 +76,12 @@ last_NAME”], deberase mostrar por consola “firtsName” e “lastName”.
 */
 
 function toCamelCaseDestruct(string, separator) {
-	[part1, part2] = string.split(separator);
-	return part1.toLowerCase() + part2.charAt(0).toUpperCase() + part2.slice(1);
+	const [part1, part2] = string.split(separator);
+	return (
+		part1.toLowerCase() +
+		part2.charAt(0).toUpperCase() +
+		part2.toLowerCase().slice(1)
+	);
 }
 
 function ArrayToCamelCaseDestruct(array, separator) {
@@ -95,7 +95,7 @@ function ArrayToCamelCaseDestruct(array, separator) {
 function toCamelCase(string, separator) {
 	let newStrArray = string.split(separator);
 	newStrArray[1] =
-		newStrArray[1].charAt(0).toUpperCase() +
+		newStrArray[1].charAt(0).toUpperCase().toLowerCase() +
 		newStrArray[1].substring(1, newStrArray[1].length);
 	return newStrArray.join('');
 }
@@ -112,7 +112,7 @@ let testArray = ['first_name', 'last_NAME'];
 
 let newTestArray = ArrayToCamelCase(testArray, '_');
 let newTestArrayDestruct = ArrayToCamelCaseDestruct(testArray, '_');
-console.log(newTestArray);
+//console.log(newTestArray);
 console.log(newTestArrayDestruct);
 
 /**
@@ -156,21 +156,35 @@ const flightsInfo =
 	'_Delayed_Departure;scq93766109;bio2133758440;11:25+_Arrival;bio0943384722;scq93766109;11:45+_Delayed_Arrival;svq7439299980;scq93766109;12:05+_Departure;scq93766109;svq2323639855;12:30';
 
 function getFlightInfo(string) {
-	[departure, city, city2, time] = string.split(';');
+	const [departure, city, city2, time] = string.split(';');
 	let result = `${departure
 		.replaceAll('_', ' ')
 		.slice(0, departure.length)} ${city.slice(0, 3).toUpperCase()} ${city2
 		.slice(0, 3)
-		.toUpperCase()} (${time})`;
+		.toUpperCase()} (${time.replace(':', 'h')})`;
 	return result;
 }
 
 function getFlightsInfo(string) {
 	let flights = string.split('+');
+
 	let max = Math.max(...flights.map((map) => map.length));
-	for (flight of flights) {
+
+	for (const flight of flights) {
 		console.log(getFlightInfo(flight).padStart(max, ' '));
 	}
 }
 
 getFlightsInfo(flightsInfo);
+
+let canyoudothis = {
+	a: {
+		b: 2,
+	},
+};
+
+console.log(canyoudothis['a']?.['c']?.['f']?.['k']);
+
+let x = function () {
+	console.log();
+};

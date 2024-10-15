@@ -2,6 +2,7 @@
 // debe devolver un novo array que conteña os índices onde aparece ese elemento no
 // array.
 
+// Ask about if there's a difference between a for of and a for in with array.entries() since it's technically the "same"
 function getIndicesOfRepeatingObjectInArray(element, array) {
 	const indexes = [];
 	for (let [index, elem] of array.entries()) {
@@ -24,6 +25,9 @@ let test = [
 	'Jose',
 ];
 console.log(getIndicesOfRepeatingObjectInArray('Bob', test));
+
+const numeros = [1, 3, 5, 1, 4, 1, 6, 8, 10, 1];
+console.log(getIndicesOfRepeatingObjectInArray(1, numeros)); // (4) [0, 3, 5, 9]
 
 /*
 Exemplo:
@@ -61,6 +65,7 @@ froitas.splice(1, 1);
 console.log(froitas.join(separator));
 
 // b. Engade laranxas e sandía detrás dos plátanos,.
+// froitas.splice(froitas.indexOf('platanos')+1, 0) ; calculates for the indexOf() parameter +1 counting for the 0 indexed array.
 froitas.splice(3, 0, 'laranxas', 'sandias');
 console.log(froitas.join(separator));
 
@@ -77,15 +82,15 @@ minúsculas.
 */
 
 function capitalize(phrase) {
-	splittedPhrase = phrase.split(' ');
-	console.log(splittedPhrase);
+	let splittedPhrase = phrase.split(' ');
+	//console.log(splittedPhrase);
 	let newPhrase = [];
 
-	for (word of splittedPhrase) {
+	for (const word of splittedPhrase) {
 		const capitalizedWord = word
 			.charAt(0)
 			.toUpperCase()
-			.concat(word.slice(1, word.length));
+			.concat(word.slice(1, word.length).toLowerCase());
 
 		newPhrase.push(capitalizedWord);
 	}
@@ -94,7 +99,7 @@ function capitalize(phrase) {
 }
 
 console.log(
-	`Capitalized phrase ${capitalize(
-		'the quick brown fox jumped over the lazy dog'
+	`Capitalized phrase: ${capitalize(
+		'the qUICK brown fox jumped over the lazy dog'
 	)}`
 );
