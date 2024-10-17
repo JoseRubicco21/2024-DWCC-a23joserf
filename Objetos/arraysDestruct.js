@@ -176,15 +176,3 @@ function getFlightsInfo(string) {
 }
 
 getFlightsInfo(flightsInfo);
-
-let canyoudothis = {
-	a: {
-		b: 2,
-	},
-};
-
-console.log(canyoudothis['a']?.['c']?.['f']?.['k']);
-
-let x = function () {
-	console.log();
-};
