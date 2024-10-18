@@ -52,11 +52,3 @@ function getGameEvents(events) {
 }
 
 getGameEvents(gameEvents.entries());
-
-function getGameEvents2([...time], [...event]) {
-	for (const [[times, events]] of [time, event]) {
-		console.log(time, events);
-	}
-}
-
-getGameEvents2(gameEvents.keys(), gameEvents.values());

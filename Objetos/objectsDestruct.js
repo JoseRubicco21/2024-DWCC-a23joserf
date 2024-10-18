@@ -73,6 +73,9 @@ const television = {
 	importe: function () {
 		return this.prezo * this.unidades;
 	},
+	importe2() {
+		return this.prezo * this.unidades;
+	},
 };
 
 /*
@@ -107,8 +110,10 @@ const {odds : {team2}} = game
 */
 
 const {
-	odds: { team1, x, team2 },
+	odds: { team1, x: draw, team2 },
 } = game;
+
+console.log(team1, draw, team2);
 
 /*
 3. Dado o seguinte obxecto:
@@ -142,7 +147,7 @@ function getScorers({ scored }) {
 	for (const [index, element] of scored.entries()) {
 		if (!scorers.hasOwnProperty(element)) {
 			scorers[element] = 1;
-		} else if (scorers.hasOwnProperty(element)) {
+		} else {
 			scorers[element] += 1;
 		}
 	}
