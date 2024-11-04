@@ -41,7 +41,7 @@ const onlyIdAndName = persoas.map(({ nome, id }) => ({ nome: nome, id: id }));
 
 // const DONTDOTHIS = [...persoas].forEach(({ idade }) => delete idade);
 
-console.log(DONTDOTHIS);
+//console.log(DONTDOTHIS);
 
 console.log(onlyIdAndName);
 
