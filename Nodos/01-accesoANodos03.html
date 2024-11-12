@@ -1,0 +1,100 @@
+<html>
+	<head>
+		<style>
+			table,
+			td,
+			tr {
+				border: 1px solid black;
+				border-collapse: collapse;
+			}
+
+			.redbg {
+				background-color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div>Users:</div>
+		<ul>
+			<li>John</li>
+			<li>Pete</li>
+		</ul>
+		<table>
+			<tbody>
+				<tr>
+					<td>1:1</td>
+					<td>2:1</td>
+					<td>3:1</td>
+					<td>4:1</td>
+					<td>5:1</td>
+				</tr>
+				<tr>
+					<td>1:2</td>
+					<td>2:2</td>
+					<td>3:2</td>
+					<td>4:2</td>
+					<td>5:2</td>
+				</tr>
+				<tr>
+					<td>1:3</td>
+					<td>2:3</td>
+					<td>3:3</td>
+					<td>4:3</td>
+					<td>5:3</td>
+				</tr>
+				<tr>
+					<td>1:4</td>
+					<td>2:4</td>
+					<td>3:4</td>
+					<td>4:4</td>
+					<td>5:4</td>
+				</tr>
+				<tr>
+					<td>1:5</td>
+					<td>2:5</td>
+					<td>3:5</td>
+					<td>4:5</td>
+					<td>5:5</td>
+				</tr>
+			</tbody>
+		</table>
+	</body>
+	<script>
+		const table = document.querySelector('table').firstElementChild;
+		const rows = Array.from(table.children);
+		rows.forEach((val, index) => {
+			const childs = Array.from(val.children);
+			childs[index].className = 'redbg';
+		});
+	</script>
+</html>
+
+<!-- 
+Utilizando as diferentes propiedades para recorrer o DOM, indica, polo menos, unha
+forma de acceder aos seguintes nodos:
+● o nodo <div> 
+    - document.querySelector("div")
+    - document.body.children[0]
+    - document.body.children.item(0)
+    - document.body.childNodes[1]
+● o nodo <ul>
+    - document.querySelector("ul")
+    - document.body.children[1]
+    - document.body.firstChild.nextSibling.nextSibling.nextSibling
+    - document.body.firstElementChild.nextElementSibling
+    - document.body.lastElementChild.previousElementSibling
+● o segundo <li>
+    - document.querySelector("li").nextElementSibling
+    - document.body.querySelector("ul").lastElementChild
+
+Dado un elemento calquera dunha árbore DOM:
+a. ¿É certo que elemento.lastChild.nextSibling é sempre null?
+    Si. Si se obtiene el ultimo nodo, y luego de ultimo se accede a su hermano que no hay pues entonces será null.
+
+b. ¿É certo que elemento.children[0].previousSibling é sempre null?
+    No siempre. Puede haber un nodo #text o #comment.
+
+Escribe o código para pintar as celas diagonais dunha táboa de vermello. Debes
+investigar en internet como cambiar a cor de fondo dunha cela mediante JavaScript.
+A táboa debería quedar similar a esta:
+-->
