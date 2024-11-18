@@ -25,7 +25,7 @@ táboa?
 let taboa = document.getElementById('taboa');
 taboa.remove();
 
-// remove() remueve los elementos html, texto en este caso no es un elemento sino un nodo #text, por ende no lo quita incluso si esta "dentro" de la tabla.
+// remove() remueve los elementos html, texto en este caso es html valido, el navegador reacomoda el nodo #text para fuera del elemento <table>
 
 /*
 Crea un documento HTML que conteña un elemento <ul>. Dende JavaScript crea 4
@@ -171,9 +171,7 @@ function crearCalendario(elemento, ano, mes) {
 	// This basically transforms the getDay index gotten into the days array declared.
 	const offset = (new Date(ano, mes).getDay() + 6) % 7;
 	const days = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
-
 	const numOfDays = new Date(ano, mes, 0).getDate();
-
 	const table = document.createElement('table');
 	const tableBody = document.createElement('tbody');
 	const tableHeader = document.createElement('thead');
@@ -236,13 +234,33 @@ elementsToOrder.forEach((el) => tablaOrdenar.append(el));
 // 9
 
 const animalList = document.querySelector('#listaAnimais');
-
+/*
 const addNumber = (element) => {
-	const childs = element.children;
+	const childs = [...element.children];
 
 	for (const child of childs) {
-		console.log(child);
+		const textValue = `${[...child.childNodes][0].data.trim()} [${
+			childs.children.length
+		}]`;
+		console.log(textValue);
+		addNumber(child);
 	}
 };
 
 addNumber(animalList);
+*/
+
+const addNumbersToUL = (ulList) => {
+	if (ulList.querySelector('li')) {
+		for (let li of ulList.children) {
+			let ul = li.querySelector('ul');
+			if (ul) {
+				let texto = document.createTextNode(`[${ul.childElementCount}]`);
+				ul.before(texto);
+				addNumbersToUL(ul);
+			}
+		}
+	}
+};
+
+addNumbersToUL(animalList);
