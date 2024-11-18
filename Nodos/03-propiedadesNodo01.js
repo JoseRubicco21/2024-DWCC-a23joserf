@@ -30,6 +30,19 @@ const [checkedInputOfEscolleSexo] = Array.from(escolleSexoElement.children)
 	.filter((element) => element.hasAttribute('checked'));
 console.log(checkedInputOfEscolleSexo);
 
+/* Sergio's magic mans way: */
+
+const [checkedInputOfEscolleSexoWithFind] = Array.from(
+	escolleSexoElement
+		.getElementsByTagName('input')
+		.find((value) => value.checked)
+);
+
+/* Query selector way */
+
+const checkedInputOfEscolleSexoWithQuerySelector =
+	escolleSexoElement.querySelector('input:checked').value;
+
 // Get text of each LI item in first UL.
 const listElement = document.querySelector('ul');
 const listItemsElements = Array.from(listElement.children)
@@ -39,8 +52,9 @@ const listItemsElements = Array.from(listElement.children)
 // Get number of LIs in first UL
 
 const numberOfLisInUl = listElement.childElementCount;
-console.log(numberOfLisInUl);
 
+console.log(numberOfLisInUl);
+console.log(listElement.length);
 //
 
 const valueOfdataWidgetName = document

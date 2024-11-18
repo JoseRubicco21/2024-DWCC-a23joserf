@@ -30,12 +30,14 @@ const numberOfLinksInThirdParagraph = [
 	...[...document.getElementsByTagName('p')[2].getElementsByTagName('a')],
 ].length;
 
+const simpler = document
+	.querySelectorAll('p')[2]
+	.getElementsByTagName('a').length;
+
 console.log(numberOfLinksInThirdParagraph);
 
 // 5
 
 const linkElementsPointingToAdress = [...document.getElementsByTagName('a')]
-	.filter((element) => element.getAttribute('href') === 'http://proba')
-	.forEach((element) => element.setAttribute('style', 'color: orange;'));
-
-console.log(linkElementsPointingToAdress);
+	.filter((link) => link.getAttribute('href') === 'http://proba')
+	.forEach((link) => link.setAttribute('style', 'color: orange;'));
