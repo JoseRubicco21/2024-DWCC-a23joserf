@@ -1,0 +1,17 @@
+.hidden {
+	display: none;
+}
+
+ul {
+	list-style: none;
+	padding: 0px 5px;
+}
+
+p {
+	width: fit-content;
+	margin: 0;
+}
+
+p:hover {
+	cursor: pointer;
+}
