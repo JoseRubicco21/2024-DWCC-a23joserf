@@ -79,14 +79,14 @@
 				elements.forEach((element) => tableBody.append(element));
 			};
 
-			const sortTable = (sortStrat) => {
+			const sortTable = (sortStrat, cellIndex) => {
 				const elementsToOrder = [...tableBody.children];
 				switch (sortStrat) {
 					case 'number':
-						sortAlgorithm(elementsToOrder, 0, sortByNumber);
+						sortAlgorithm(elementsToOrder, cellIndex, sortByNumber);
 						break;
 					case 'string':
-						sortAlgorithm(elementsToOrder, 1, sortByName);
+						sortAlgorithm(elementsToOrder, cellIndex, sortByName);
 						break;
 					default:
 						break;
@@ -94,7 +94,7 @@
 			};
 
 			tableHeader.addEventListener('click', (event) => {
-				sortTable(event.target.dataset.type);
+				sortTable(event.target.dataset.type, event.target.cellIndex);
 			});
 		</script>
 	</body>
