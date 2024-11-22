@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<style>
+			table {
+				border-collapse: collapse;
+			}
+			th,
+			td {
+				border: 1px solid black;
+				padding: 4px;
+			}
+			th {
+				cursor: pointer;
+			}
+			th:hover {
+				background: yellow;
+			}
+		</style>
+	</head>
+
+	<body>
+		<table id="grid">
+			<thead>
+				<tr>
+					<th data-type="number">Age</th>
+					<th data-type="string">Name</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>5</td>
+					<td>John</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>Pete</td>
+				</tr>
+				<tr>
+					<td>12</td>
+					<td>Ann</td>
+				</tr>
+				<tr>
+					<td>9</td>
+					<td>Eugene</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>Ilya</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<script>
+			const tableBody = document.querySelector('tbody');
+			const tableHeader = document.querySelector('thead');
+
+			/* Strategies defined*/
+			const sortByNumber = (data, columnIndex) =>
+				data.sort(
+					(a, b) =>
+						+a.children[columnIndex].innerText -
+						+b.children[columnIndex].innerText
+				);
+
+			const sortByName = (data, columnIndex) =>
+				data.sort((a, b) => {
+					console.log(data);
+					const textA = a.children[columnIndex].innerText.toLowerCase();
+					const textB = b.children[columnIndex].innerText.toLowerCase();
+
+					console.log(textA, textB);
+					return textA.localeCompare(textB); // Compare strings alphabetically
+				});
+
+			const sortAlgorithm = (elements, columnIndex, sortStrat) => {
+				sortStrat(elements, columnIndex);
+				elements.forEach((element) => tableBody.append(element));
+			};
+
+			const sortTable = (sortStrat) => {
+				const elementsToOrder = [...tableBody.children];
+				switch (sortStrat) {
+					case 'number':
+						sortAlgorithm(elementsToOrder, 0, sortByNumber);
+						break;
+					case 'string':
+						sortAlgorithm(elementsToOrder, 1, sortByName);
+						break;
+					default:
+						break;
+				}
+			};
+
+			tableHeader.addEventListener('click', (event) => {
+				sortTable(event.target.dataset.type);
+			});
+		</script>
+	</body>
+</html>

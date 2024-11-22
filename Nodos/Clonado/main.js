@@ -264,3 +264,12 @@ const addNumbersToUL = (ulList) => {
 };
 
 addNumbersToUL(animalList);
+
+const revisedAddText = (list) => {
+	for (const element of list.children) {
+		let listaInterna = element.querySelector('ul');
+		if (listaInterna != null) {
+			let numOfChildre = listaInterna.children.length;
+		}
+	}
+};
