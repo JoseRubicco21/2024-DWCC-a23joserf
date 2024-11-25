@@ -66,11 +66,8 @@
 
 			const sortByName = (data, columnIndex) =>
 				data.sort((a, b) => {
-					console.log(data);
 					const textA = a.children[columnIndex].innerText.toLowerCase();
 					const textB = b.children[columnIndex].innerText.toLowerCase();
-
-					console.log(textA, textB);
 					return textA.localeCompare(textB); // Compare strings alphabetically
 				});
 
