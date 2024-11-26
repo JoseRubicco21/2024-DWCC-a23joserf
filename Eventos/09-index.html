@@ -91,7 +91,8 @@
 			};
 
 			tableHeader.addEventListener('click', (event) => {
-				sortTable(event.target.dataset.type, event.target.cellIndex);
+				if (event.target.tagName === 'TH')
+					sortTable(event.target.dataset.type, event.target.cellIndex);
 			});
 		</script>
 	</body>
