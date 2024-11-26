@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			textarea:focus {
+				border: 5px solid green;
+				outline: none;
+			}
+		</style>
+	</head>
+	<body>
+		<form action="">
+			<textarea></textarea>
+		</form>
+	</body>
+	<script>
+		/*
+         Crea unha páxina que teña un formulario con unha caixa de texto. Fai que cando a
+caixa de texto teña o foco, o borde da mesma sexa verde e cando perda o foco volva
+ao estilo por defecto.
+Ademais, cando a caixa de texto perda o foco e estea baleira, debe escribirse por
+consola unha mensaxe informando da situación.*/
+		const textArea = document.querySelector('textarea');
+
+		textArea.addEventListener('blur', (event) => {
+			if (event.target.value == '') console.log("Left and there's no text");
+		});
+	</script>
+</html>

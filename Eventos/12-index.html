@@ -27,18 +27,18 @@
 
 		<script>
 			const list = document.querySelector('#ul');
-			const refs = new Set();
+			//const refs = new Set();
 
 			list.addEventListener('click', (event) => {
 				if (event.target.tagName === 'LI') {
 					handleControl(event);
 
-					handleShift(event, refs);
+					//handleShift(event, refs);
 				}
 			});
-
+			// event.metaKey : Cmd in mac, win in windows and so on. An 'OS' key basically.
 			function handleControl(event) {
-				if (!event.ctrlKey) {
+				if (!event.ctrlKey && !event.metaKey) {
 					[...event.target.closest('ul').children].forEach((el) =>
 						el.classList.remove('selected')
 					);
@@ -48,6 +48,7 @@
 				}
 			}
 
+			/*
 			function handleShift(event, refs) {
 				if (!event.shiftKey) {
 					[...event.target.closest('ul').children].forEach((el) =>
@@ -70,7 +71,7 @@
 						console.log(refs);
 					}
 				}
-			}
+			}*/
 		</script>
 	</body>
 </html>

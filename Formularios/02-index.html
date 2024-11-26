@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<form action="">
+			<input type="text" name="text" id="text" /><br />
+			<input type="radio" name="radio" id="rd1" value="js" /><label for="rd1"
+				>Js</label
+			><br />
+			<input type="radio" name="radio" id="rd2" value="html" /><label for="rd2"
+				>Html</label
+			><br />
+			<input type="radio" name="radio" id="rd3" value="css" /><label for="rd3"
+				>CSS</label
+			><br />
+			<input
+				type="checkbox"
+				name="checkbox"
+				value="I have been checked"
+				id="chk1"
+			/>
+			<label for="chk1">Check me :D</label>
+			<br />
+			<textarea name="textArea" id="textArea"></textarea>
+			<br />
+			<select name="select" id="select">
+				<option value="1">1</option>
+				<option value="2">2</option>
+			</select>
+			<br />
+			<input type="submit" value="Submit" />
+		</form>
+	</body>
+	<script>
+		const form = document.querySelector('form');
+
+		form.addEventListener('submit', (event) => {
+			event.preventDefault();
+			console.log(form.elements['text'].value);
+			console.log(form.elements['radio'].value);
+			console.log(form.elements['checkbox'].value);
+			console.log(form.elements['textArea'].value);
+			console.log(form.elements['select'].value);
+		});
+	</script>
+</html>
