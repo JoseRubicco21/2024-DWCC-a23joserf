@@ -48,13 +48,13 @@
 						type="text"
 						name="phone"
 						id="phone"
-						pattern="(?:^\d{9}$|^\d{3}[.-\s](\d{2}[.-\s]){3})"
+						pattern="(?:^\d{9}$|^\d{3}([.-\s]\d{2})(?:\1){2})"
 						required
 					/>
 				</li>
 				<li>
 					<label for="comment">Comment:</label>
-					<textarea name="comment" id="comment" required></textarea>
+					<textarea name="comment" id="comment" required maxlength="200"></textarea>
 				</li>
 				<li>
 					<button>Submit comment</button>
