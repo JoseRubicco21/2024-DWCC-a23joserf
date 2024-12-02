@@ -10,6 +10,7 @@
 			crossorigin="anonymous"
 		/>
 		<link rel="stylesheet" href="main.css" />
+
 		<script
 			defer
 			src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
@@ -44,8 +45,13 @@
 					/>
 				</div>
 				<div>
-					<button class="btn btn-dark" id="add-item-button" disabled>
-						<i class="fa-solid fa-plus me-1"></i> Engadir elemeto
+					<button
+						class="btn btn-dark"
+						id="add-item-button"
+						state="adding"
+						disabled
+					>
+						<i class="fa-solid fa-plus me-1"></i><span>Engadir elemeto</span>
 					</button>
 				</div>
 				<div id="items-container">
