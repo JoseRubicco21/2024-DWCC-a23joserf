@@ -1,5 +1,7 @@
 'use-strict';
 
+//QUESTION: There are some functions that could be coupled into check UI
+
 /* List of important items needed for usual operations:
 - "List items" div
 - "Delete all button"

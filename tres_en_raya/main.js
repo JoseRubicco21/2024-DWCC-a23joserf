@@ -1,19 +1,73 @@
 'use-strict';
 
-/* Player 1 : 1, Machine : -1, Empty : 0 */
-const board = [
-	[-1, 0, 1],
-	[0, -1, 0],
-	[1, 0, -1],
+/**
+ * =============================
+ *  GAME LOGIC
+ * =============================
+ */
+const BOARD_SETTINGS = {
+	x: 3,
+	y: 3,
+	get length() {
+		return this.x * this.y;
+	},
+};
+
+let boardAvailabilityState = Array(BOARD_SETTINGS.length).fill(
+	true,
+	0,
+	BOARD_SETTINGS.length
+);
+
+let board = [
+	[-1, 1, -1],
+	[-1, 1, 1],
+	[1, -1, 0],
 ];
 
-// negative needs = [i][j+2] == [i+1][j+1] === [i+2][j]
+const DEFAULT_STATE = { state: false, player: 0 };
+
+function printBoard(board) {
+	console.table(board);
+}
+
+/**
+ * ==========================
+ * 	BOARD MODIFICATION
+ * ==========================
+ */
+
+function updateBoard({ x, y }, value) {
+	board[x][y] = value;
+}
+
+function updateAvailabilityBoard(index) {
+	boardAvailabilityState[index] = false;
+}
+
+/**
+ *  =================
+ *  INPUT VALIDATION
+ *  =================
+ */
+
+function validateInput(index) {
+	if (boardAvailabilityState[index]) return true;
+	return false;
+}
+
+/**
+ * =============================
+ * BOARD VALIDATION
+ * =============================
+ */
+
 const validateRow = (board) => {
 	for (row of board) {
 		if (row[0] != 0 && row[0] === row[1] && row[1] === row[2])
 			return { state: true, player: row[0] };
 	}
-	return { state: false, player: 0 };
+	return DEFAULT_STATE;
 };
 
 const validateCols = (board) => {
@@ -26,7 +80,7 @@ const validateCols = (board) => {
 			)
 				return { state: true, player: board[i][j] };
 		}
-		return { state: false, player: 0 };
+		return DEFAULT_STATE;
 	}
 };
 
@@ -41,7 +95,7 @@ const validatePositiveDiagonal = (board) => {
 				return { state: true, player: board[i][j] };
 		}
 	}
-	return { state: false, player: 0 };
+	return DEFAULT_STATE;
 };
 
 const validateNegativeDiagonal = (board) => {
@@ -60,34 +114,38 @@ const validateNegativeDiagonal = (board) => {
 				};
 		}
 	}
-	return { state: false, player: 0 };
+	return DEFAULT_STATE;
+};
+
+const validateTie = (board) => {
+	const flattedBoard = board.flat();
+	if (!flattedBoard.includes(0)) return { state: true, player: 0 };
+	return DEFAULT_STATE;
 };
 
 const validateBoard = (board, [...validations]) => {
 	for (const validationStrat of validations) {
-		gameState = validationStrat(board);
-		if (gameState.state == true) {
-			switch (validationStrat.name) {
-				case 'validateRow':
-					console.log('Won at a row');
-					return gameState;
-				case 'validateCols':
-					console.log('Won at a col');
-					return gameState;
-				case 'validatePositiveDiagonal':
-					console.log('Won at pos diag');
-					return gameState;
-				case 'validateNegativeDiagonal':
-					console.log('Won at neg diag');
-					return gameState;
-				default:
-					return gameState;
-			}
-		}
+		let gameState = validationStrat(board);
+		if (gameState.state == true) return gameState;
+		return DEFAULT_STATE;
 	}
 };
 
-/** Random AI difficulty */
+console.log(
+	validateBoard(board, [
+		validateRow,
+		validateCols,
+		validatePositiveDiagonal,
+		validateNegativeDiagonal,
+		validateTie,
+	])
+);
+
+/**
+ * ========================
+ * 	AI Logic
+ * ========================
+ *  */
 
 const generateRandomNumber = (min, max) =>
 	Math.floor(Math.random() * (max - min + 1)) + min;
@@ -107,11 +165,38 @@ const validatePossibleMove = (board) => {
     Make one that is unwinnable, as it's always tieable? 
 */
 
-console.log(
-	validateBoard(board, [
-		validateRow,
-		validateCols,
-		validatePositiveDiagonal,
-		validateNegativeDiagonal,
-	])
-);
+// Transform child element of a div list into a index
+const ArrayIndexToMatrixIndex = (int, rowNumber, colNumber) => {
+	const i = Math.floor(int / colNumber);
+	const j = int % rowNumber;
+	return { x: i, y: j };
+};
+
+/**
+ * ==========
+ * ENTRYPOINT
+ * ==========
+ */
+
+const boardContainer = document.getElementById('board-container');
+const elementBoard = [...boardContainer.children];
+
+function handleBoard(event) {
+	const indexOfCell = elementBoard.indexOf(event.target);
+	const matrixIndices = ArrayIndexToMatrixIndex(
+		indexOfCell,
+		BOARD_SETTINGS.x,
+		BOARD_SETTINGS.y
+	);
+
+	if (validateInput(indexOfCell, boardAvailabilityState)) {
+		updateAvailabilityBoard(indexOfCell);
+		updateBoard(matrixIndices, 2);
+	}
+}
+
+function init() {
+	boardContainer.addEventListener('click', handleBoard);
+}
+
+init();
