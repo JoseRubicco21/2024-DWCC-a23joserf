@@ -20,12 +20,20 @@ let boardAvailabilityState = Array(BOARD_SETTINGS.length).fill(
 );
 
 let board = [
-	[-1, 1, -1],
-	[-1, 1, 1],
-	[1, -1, 0],
+	[0, 0, 0],
+	[0, 0, 0],
+	[0, 0, 0],
 ];
 
-const DEFAULT_STATE = { state: false, player: 0 };
+const GAME = {
+	DEFAULT_STATE: { state: false, player: 0 },
+	STATE: { state: false, player: 0 },
+	TURN: 1,
+	changeTurn() {
+		this.TURN *= -1;
+		console.log(this.TURN);
+	},
+};
 
 function printBoard(board) {
 	console.table(board);
@@ -43,6 +51,16 @@ function updateBoard({ x, y }, value) {
 
 function updateAvailabilityBoard(index) {
 	boardAvailabilityState[index] = false;
+}
+
+function addElementToBoard(player, target) {
+	const elementToAdd = document.createElement('i');
+	if (player === 1)
+		elementToAdd.classList.add('fa-solid', 'fa-x', 'm-5', 'p-5');
+	if (player === -1)
+		elementToAdd.classList.add('fa-regular', 'fa-circle', 'm-5', 'p-5');
+
+	target.append(elementToAdd);
 }
 
 /**
@@ -67,7 +85,7 @@ const validateRow = (board) => {
 		if (row[0] != 0 && row[0] === row[1] && row[1] === row[2])
 			return { state: true, player: row[0] };
 	}
-	return DEFAULT_STATE;
+	return GAME.DEFAULT_STATE;
 };
 
 const validateCols = (board) => {
@@ -80,7 +98,7 @@ const validateCols = (board) => {
 			)
 				return { state: true, player: board[i][j] };
 		}
-		return DEFAULT_STATE;
+		return GAME.DEFAULT_STATE;
 	}
 };
 
@@ -95,7 +113,7 @@ const validatePositiveDiagonal = (board) => {
 				return { state: true, player: board[i][j] };
 		}
 	}
-	return DEFAULT_STATE;
+	return GAME.DEFAULT_STATE;
 };
 
 const validateNegativeDiagonal = (board) => {
@@ -114,32 +132,30 @@ const validateNegativeDiagonal = (board) => {
 				};
 		}
 	}
-	return DEFAULT_STATE;
+	return GAME.DEFAULT_STATE;
 };
 
 const validateTie = (board) => {
 	const flattedBoard = board.flat();
 	if (!flattedBoard.includes(0)) return { state: true, player: 0 };
-	return DEFAULT_STATE;
+	return GAME.DEFAULT_STATE;
 };
 
 const validateBoard = (board, [...validations]) => {
 	for (const validationStrat of validations) {
 		let gameState = validationStrat(board);
 		if (gameState.state == true) return gameState;
-		return DEFAULT_STATE;
 	}
+	return GAME.DEFAULT_STATE;
 };
 
-console.log(
-	validateBoard(board, [
-		validateRow,
-		validateCols,
-		validatePositiveDiagonal,
-		validateNegativeDiagonal,
-		validateTie,
-	])
-);
+const VALIDATIONS = [
+	validateRow,
+	validateCols,
+	validatePositiveDiagonal,
+	validateNegativeDiagonal,
+	validateTie,
+];
 
 /**
  * ========================
@@ -173,7 +189,9 @@ const ArrayIndexToMatrixIndex = (int, rowNumber, colNumber) => {
 };
 
 /**
- * ==========
+ * ==========State)) {
+		updateAvailabilityBoard(indexOfCell);
+		updateBoard(matrixIndices, 2);
  * ENTRYPOINT
  * ==========
  */
@@ -191,12 +209,19 @@ function handleBoard(event) {
 
 	if (validateInput(indexOfCell, boardAvailabilityState)) {
 		updateAvailabilityBoard(indexOfCell);
-		updateBoard(matrixIndices, 2);
+		updateBoard(matrixIndices, GAME.TURN);
+		addElementToBoard(GAME.TURN, event.target);
+		GAME.changeTurn();
+		GAME.STATE = validateBoard(board, VALIDATIONS);
+		console.log(GAME.STATE);
+		console.table(board);
 	}
 }
 
 function init() {
 	boardContainer.addEventListener('click', handleBoard);
+	console.log(validateBoard(board, VALIDATIONS));
 }
 
 init();
+addElementToBoard;

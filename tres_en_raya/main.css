@@ -1,0 +1,7 @@
+.cell {
+	height: 275px !important;
+}
+
+#board-container {
+	height: 75vh !important;
+}
